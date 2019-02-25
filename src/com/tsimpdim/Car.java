@@ -1,24 +1,14 @@
 package com.tsimpdim;
 
-public abstract class Car extends Thread{
+public class Car extends Thread{
     private String name;
-    private String colour;
     private Bridge bridge;
     private int waitTime; // Time it takes to cross the bridge
 
-    public Car(String carName, String colour, int waitTime, Bridge bridge){
+    public Car(String carName, int waitTime, Bridge bridge){
         this.name = carName;
-        this.colour = colour;
         this.waitTime = waitTime;
         this.bridge = bridge;
-    }
-
-    // Removes car from the problem
-    // Implementation changes with car type
-    abstract void carQuit();
-
-    public Bridge getBridge() {
-        return bridge;
     }
 
     @Override
