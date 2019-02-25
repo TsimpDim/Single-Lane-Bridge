@@ -3,14 +3,17 @@ package com.tsimpdim;
 public class Car extends Thread{
     private String name;
     private Bridge bridge;
-    private int waitTime; // Time it takes to cross the bridge
+    private long waitTime; // Time it takes to cross the bridge
 
-    public Car(String carName, int waitTime, Bridge bridge){
+    public Car(String carName, Bridge bridge){
         this.name = carName;
-        this.waitTime = waitTime;
+        this.waitTime = (long) (Math.random() * 50 + Math.random());
         this.bridge = bridge;
     }
 
+    public long getWaitTime() {
+        return waitTime;
+    }
 
     @Override
     public void run() {
@@ -27,7 +30,7 @@ public class Car extends Thread{
         // After the other car is done crossing the bridge, cross it yourself
         bridge.lock();
 
-        System.out.println(name + " is crossing the bridge");
+        System.out.println(name + " is crossing the bridge[" + getWaitTime() + "ms]");
 
         // Sleep for <waitTime> for slower execution
         try{
