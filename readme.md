@@ -29,6 +29,8 @@ RedCar5 crossed the bridge
 
 ### Variable Wait Time Scenario
 5 Red[Var], 2 Blue[Var]
+
+## Run 1
 ```
 									BlueCar1 is crossing the bridge[10ms]
 RedCar2 is waiting to cross the bridge
@@ -49,4 +51,28 @@ RedCar4 is crossing the bridge[4ms]
 RedCar4 crossed the bridge
 RedCar5 is crossing the bridge[29ms]
 RedCar5 crossed the bridge
+```
+
+## Run 1
+```
+RedCar1 is crossing the bridge[39ms]
+									BlueCar1 is waiting to cross the bridge
+RedCar2 is waiting to cross the bridge
+									BlueCar2 is waiting to cross the bridge
+RedCar3 is waiting to cross the bridge
+RedCar4 is waiting to cross the bridge
+RedCar5 is waiting to cross the bridge
+RedCar1 crossed the bridge
+									BlueCar1 is crossing the bridge[18ms]
+									BlueCar1 crossed the bridge
+RedCar2 is crossing the bridge[2ms]
+RedCar2 crossed the bridge
+									BlueCar2 is crossing the bridge[45ms]
+									BlueCar2 crossed the bridge
+RedCar5 is crossing the bridge[25ms]
+RedCar5 crossed the bridge
+RedCar4 is crossing the bridge[14ms]
+RedCar4 crossed the bridge
+RedCar3 is crossing the bridge[18ms]
+RedCar3 crossed the bridge
 ```
