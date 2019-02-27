@@ -26,6 +26,7 @@ public abstract class Car extends Thread{
         while(bridge.isBeingCrossed() ||
                 (this instanceof BlueCar && (!bridge.hasRedCarCrossed() && RedCar.redCars > 0)) ||
                 (this instanceof RedCar && (bridge.hasRedCarCrossed() && BlueCar.blueCars > 0))){
+
             try{
                 Thread.sleep(5);
             } catch (InterruptedException e) {}
@@ -46,10 +47,22 @@ public abstract class Car extends Thread{
         this.reducePop();
         if(this instanceof RedCar){
             bridge.setRedCarCrossed(true);
-            System.out.println("-BlueCar time-");
+
+            if(BlueCar.blueCars > 0)
+                System.out.println("-BlueCar time-");
+            else if(BlueCar.blueCars == 0 && RedCar.redCars > 0)
+                System.out.println("-No more BlueCars remaining -> RedCar time");
+            else
+                System.out.println("<End>");
         }else{
             bridge.setRedCarCrossed(false);
-            System.out.println("-RedCar time-");
+
+            if(RedCar.redCars > 0)
+                System.out.println("-RedCar time-");
+            else if(RedCar.redCars == 0 && BlueCar.blueCars > 0)
+                System.out.println("-No more RedCars remaining -> BlueCar time");
+            else
+                System.out.println("<End>");
         }
 
 
