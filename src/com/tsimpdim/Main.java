@@ -34,10 +34,10 @@ public class Main {
 
         // Fill array
         for(int i = 0; i < redCarPop; i++)
-            cars[i] = new RedCar(mainBridge, waitTime);
+            cars[i] = new RedCar(mainBridge, waitTime, redCarPop);
 
         for(int i = redCarPop; i < cars.length; i++)
-            cars[i] = new BlueCar(mainBridge, waitTime);
+            cars[i] = new BlueCar(mainBridge, waitTime, blueCarPop);
 
         // Start cars
         for(int i = 0; i < cars.length; i++) {
