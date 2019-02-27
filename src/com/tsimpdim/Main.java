@@ -29,8 +29,8 @@ public class Main {
             }
         }
 
-        Bridge mainBridge = new Bridge();
         Car[] cars = new Car[redCarPop + blueCarPop];
+        Bridge mainBridge = new Bridge(redCarPop, blueCarPop);
 
         // Fill array
         for(int i = 0; i < redCarPop; i++)

@@ -19,13 +19,9 @@ public abstract class Car extends Thread{
         if(bridge.isBeingCrossed())
             System.out.println(name + " is waiting to cross the bridge");
 
-        // While someone is crossing the bridge
-        // Or you're a blue car and a red one hasn't crossed (assuming there are red cars remaining)
-        // Or you're a red car and a red one *has* crossed (assuming there are blue cars remaining)
-        // Then wait for your turn
-        while(bridge.isBeingCrossed() ||
-                (this instanceof BlueCar && (!bridge.hasRedCarCrossed() && RedCar.redCars > 0)) ||
-                (this instanceof RedCar && (bridge.hasRedCarCrossed() && BlueCar.blueCars > 0))){
+        while(bridge.isBeingCrossed()){
+
+            // ??
 
             try{
                 Thread.sleep(5);
