@@ -1,44 +1,52 @@
 package com.tsimpdim;
 
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Bridge {
 
 
-    private boolean beingCrossed; // Used to prevent many cars from crossing at once. <!> This is not used in the first scenario
-    private boolean redCarCrossed; // Used to alternate between red and blue cars
-    private double weightOfSides; // Used to weigh which of the sides (red/blue) needs to go first for maximum efficiency. > 0 = blue priority | < 0 = red priority;
+    public static ReentrantLock lock;
+    private Car[] cars;
 
-    public Bridge(int redCarPop, int blueCarPop){
+    public Bridge(Car[] cars){
         super();
 
-
-        beingCrossed = false;
-        redCarCrossed = false;
-
-        double redWeight = (double) redCarPop/(redCarPop+blueCarPop);
-        double blueWeight = (double) blueCarPop/(redCarPop+blueCarPop);
-        weightOfSides = blueWeight - redWeight;
+        lock = new ReentrantLock();
+        this.cars = cars;
     }
 
-    // Allow cars to cross bridge
-    public void unlock(){
-        beingCrossed = false;
-    }
+    public void calcWeights(){
 
-    // Disallow cars to cross bridge
-    public void lock(){
-        beingCrossed = true;
-    }
+        // Get number of cars that haven't crossed yet
+        int remainingRed = 0;
+        int remainingBlue = 0;
+        int remainingTotal;
 
-    public boolean hasRedCarCrossed() {
-        return redCarCrossed;
-    }
+        for(int i = 0; i < cars.length; i++)
+            if(cars[i] instanceof RedCar && !cars[i].isCrossed())
+                remainingRed++;
+            else if(cars[i] instanceof BlueCar && !cars[i].isCrossed())
+                remainingBlue++;
 
-    public void setRedCarCrossed(boolean redCarCrossed) {
-        this.redCarCrossed = redCarCrossed;
-    }
+        remainingTotal = remainingBlue + remainingRed;
 
-    public boolean isBeingCrossed() {
-        return beingCrossed;
+        // Calculate weights
+        int redWeight = (int)(((double) remainingRed/(remainingTotal)) * 10);
+        int blueWeight = 10 - redWeight;
+
+        // Make 0s into 1s, since minimum priority is 1
+        if(redWeight == 0) redWeight = 1;
+        if(blueWeight == 0) blueWeight = 1;
+
+        System.out.println("RedWeight -> " + redWeight);
+        System.out.println("BlueWeight -> " + blueWeight);
+
+        // Set priorities
+        for(int i = 0; i < cars.length; i++)
+            if(cars[i] instanceof RedCar)
+                cars[i].setPriority(redWeight);
+            else
+                cars[i].setPriority(blueWeight);
     }
 }
