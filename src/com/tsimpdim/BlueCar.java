@@ -7,7 +7,6 @@ public class BlueCar extends Car{
     public BlueCar(Bridge bridge, int waitTime){
         super("BlueCar" + idx, waitTime, bridge);
 
-
         idx++;
     }
 }
