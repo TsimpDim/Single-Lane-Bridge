@@ -1,29 +1,23 @@
 package com.tsimpdim;
 
 
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Bridge {
 
 
     private boolean beingCrossed; // Used to prevent many cars from crossing at once. <!> This is not used in the first scenario
     private boolean redCarCrossed; // Used to alternate between red and blue cars
+    public static ReentrantLock lock;
 
     public Bridge(){
         super();
 
-
+        lock = new ReentrantLock();
         beingCrossed = false;
         redCarCrossed = false;
     }
 
-    // Allow cars to cross bridge
-    public void unlock(){
-        beingCrossed = false;
-    }
-
-    // Disallow cars to cross bridge
-    public void lock(){
-        beingCrossed = true;
-    }
 
     public boolean hasRedCarCrossed() {
         return redCarCrossed;
